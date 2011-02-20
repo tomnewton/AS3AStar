@@ -128,44 +128,44 @@ package com.yyztom.pathfinding.astar
 				if( grid[x-1] && grid[x-1][y]) {
 					ret.push(grid[x-1][y]);
 				}
-			}catch(e:ReferenceError){}
+			}catch(e:ReferenceError){}catch(e:RangeError){}
 			try{
 				if(grid[x+1] && grid[x+1][y]) {
 					ret.push(grid[x+1][y]);
 				}
-			}catch(e:ReferenceError){}
+			}catch(e:ReferenceError){}catch(e:RangeError){}
 			try{
 				if(grid[x] && grid[x][y-1]) {
 					ret.push(grid[x][y-1]);
 				}
-			}catch(e:ReferenceError){}
+			}catch(e:ReferenceError){}catch(e:RangeError){}
 			try{
 				if(grid[x] && grid[x][y+1]) {
 					ret.push(grid[x][y+1]);
 				}
-			}catch(e:ReferenceError){}
+			}catch(e:ReferenceError){}catch(e:RangeError){}
 			
 			//diags
 			try{
 				if( grid[x+1] && grid[x+1][y-1] ){ //top right
 					ret.push(grid[x+1][y-1]);
 				}
-			}catch(e:ReferenceError){}
+			}catch(e:ReferenceError){}catch(e:RangeError){}
 			try{
 				if( grid[x+1] && grid[x+1][y+1] ){ //bottom right
 					ret.push(grid[x+1][y+1]);
 				}
-			}catch(e:ReferenceError){}
+			}catch(e:ReferenceError){}catch(e:RangeError){}
 			try{
 				if ( grid[x-1] && grid[x-1][y+1] ){ //bottom left
 					ret.push( grid[x-1][y+1]  );
 				}
-			}catch(e:ReferenceError){}
+			}catch(e:ReferenceError){}catch(e:RangeError){}
 			try{
 				if ( grid[x-1] && grid[x-1][y-1] ){ //top left
 					ret.push( grid[x-1][y-1] );
 				}
-			}catch(e:ReferenceError){}
+			}catch(e:ReferenceError){}catch(e:RangeError){}
 			return ret;
 		}
 		
