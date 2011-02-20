@@ -1,0 +1,4 @@
+AS3AStar
+================
+
+Pretty fast Actionscript3 AStar implementation using a BinaryHeap.
