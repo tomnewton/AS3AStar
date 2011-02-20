@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="750" minHeight="530" width="650" creationComplete="init()">
+	
+	
+	<fx:Script>
+		<![CDATA[
+			import com.yyztom.test.event.DemoEvent;
+			import com.yyztom.test.ui.Demo;
+			
+			private function init() : void{
+				
+				var demo : Demo = new Demo(density.value);
+				holder.addChild(demo);
+				
+				demo.addEventListener(DemoEvent.ASTAR_TIME, handle_astarTime);
+			}
+			
+			private function handle_astarTime ( e : DemoEvent ) : void {
+				
+				time.text = "AStar search took " + e.time.toString() + " ms";
+				
+			}
+			
+			private function handle_click(e:Event): void{
+				
+				holder.removeChildAt(0);
+				init();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	<mx:HBox width="100%" height="100%">
+	
+	<mx:UIComponent id="holder" width="500" height="500" />
+		<mx:VBox x="550" width="100%" height="100%">
+			<mx:HBox>
+				<mx:Label text="Wall density"/>
+				<mx:NumericStepper id="density" value=".25" minimum="0" maximum=".4" stepSize=".05" name="Density"/>
+			</mx:HBox>
+			
+			<mx:Button id="reset" label="Reset Grid" width="100%" click="handle_click(event)"/>
+			<mx:Label id="time" width="100%" text="RESULT"/>
+		</mx:VBox>
+	</mx:HBox>
+	
+	
+	
+	
+</s:Application>
