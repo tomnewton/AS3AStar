@@ -119,7 +119,7 @@ package com.yyztom.pathfinding.astar
 		
 		
 		
-		private function neighbors( grid : Vector.<Vector.<AStarNodeVO>> , node : AStarNodeVO ) : Vector.<AStarNodeVO> {
+		private function neighbors( grid : Vector.<Vector.<AStarNodeVO>> , node : AStarNodeVO, allowDiagonal : Boolean = true ) : Vector.<AStarNodeVO> {
 			var ret : Vector.<AStarNodeVO> = new Vector.<AStarNodeVO>();
 			var x : Number = node.position.x;
 			var y : Number = node.position.y;
@@ -146,26 +146,30 @@ package com.yyztom.pathfinding.astar
 			}catch(e:ReferenceError){}catch(e:RangeError){}
 			
 			//diags
-			try{
-				if( grid[x+1] && grid[x+1][y-1] ){ //top right
-					ret.push(grid[x+1][y-1]);
-				}
-			}catch(e:ReferenceError){}catch(e:RangeError){}
-			try{
-				if( grid[x+1] && grid[x+1][y+1] ){ //bottom right
-					ret.push(grid[x+1][y+1]);
-				}
-			}catch(e:ReferenceError){}catch(e:RangeError){}
-			try{
-				if ( grid[x-1] && grid[x-1][y+1] ){ //bottom left
-					ret.push( grid[x-1][y+1]  );
-				}
-			}catch(e:ReferenceError){}catch(e:RangeError){}
-			try{
-				if ( grid[x-1] && grid[x-1][y-1] ){ //top left
-					ret.push( grid[x-1][y-1] );
-				}
-			}catch(e:ReferenceError){}catch(e:RangeError){}
+			//diags
+            if ( allowDiagonal ){
+				try{
+					if ( !grid[x][y-1].isWall || !grid[x+1][y].isWall ){		
+						ret.push(grid[x+1][y-1]); //up right
+					}
+				}catch(e:ReferenceError){}catch(e:RangeError){}
+				try{
+					if ( !grid[x+1][y].isWall || !grid[x][y+1].isWall ){
+						ret.push(grid[x+1][y+1]); //down right
+					}
+				}catch(e:ReferenceError){}catch(e:RangeError){}
+				try{
+					if ( !grid[x-1][y].isWall || !grid[x][y+1].isWall ){
+						ret.push( grid[x-1][y+1]  ); //down left
+					}
+
+				}catch(e:ReferenceError){}catch(e:RangeError){}
+				try{
+					if ( !grid[x-1][y].isWall || !grid[x][y-1].isWall ){
+							ret.push( grid[x-1][y-1] );//up left
+					}
+				}catch(e:ReferenceError){}catch(e:RangeError){}
+			}
 			return ret;
 		}
 		
